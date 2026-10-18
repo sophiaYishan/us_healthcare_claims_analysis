@@ -17,7 +17,7 @@ Source: [Healthcare Provider Fraud Detection Analysis (Kaggle)](https://www.kagg
 - Every `BeneID` in the claims tables exists in Beneficiary, and every beneficiary has at least one claim (138,556 distinct claim BeneIDs = 138,556 beneficiaries).
 - The providers in the claims tables match the 5,410 providers in Labels exactly.
 
-**Time period:** the latest claim end date is 31 Dec 2009. Some inpatient stays began in December 2008.
+**Time period:** claims ending in calendar year 2009 (all but one claim end between 1 Jan and 31 Dec 2009). Some claims start in late 2008 and span the year boundary (inpatient 686, 1.69%; outpatient 2,019, 0.39%); one outpatient claim ends in 2008. All are kept.
 
 ---
 
@@ -55,9 +55,9 @@ Source: [Healthcare Provider Fraud Detection Analysis (Kaggle)](https://www.kagg
 | `ChronicCond_Osteoporasis` | Osteoporosis flag | Prevalence 27% |
 | `ChronicCond_rheumatoidarthritis` | Rheumatoid arthritis flag | Prevalence 26% |
 | `ChronicCond_stroke` | Stroke flag | Prevalence 8% |
-| `IPAnnualReimbursementAmt` | Total **annual** inpatient reimbursement for the beneficiary | Annual total, not per claim. Median is 0 (most beneficiaries have no inpatient stay). Contains some negative values |
+| `IPAnnualReimbursementAmt` | Total **annual** inpatient reimbursement for the beneficiary | Annual total, not per claim. 26.0% of beneficiaries > 0, but only 22.6% have an inpatient claim, so this field does not reconcile with the claims. 15 negative values (0.01%) |
 | `IPAnnualDeductibleAmt` | Total annual inpatient deductible paid by the beneficiary | Annual total. No nulls |
-| `OPAnnualReimbursementAmt` | Total annual outpatient reimbursement | Annual total. No nulls |
+| `OPAnnualReimbursementAmt` | Total annual outpatient reimbursement | Annual total. No nulls. 12 negative values (0.01%) |
 | `OPAnnualDeductibleAmt` | Total annual outpatient deductible paid | Annual total. No nulls |
 
 **Chronic condition coding.** The source has no codebook; raw values are 1 and 2 only. 1 = Yes and 2 = No was inferred for all `ChronicCond_*` columns (one coding scheme assumed across the table), then recoded to 1/0:
